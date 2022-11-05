@@ -1,0 +1,91 @@
+> use address_db
+switched to db address_db
+> db
+> db.address.find().pretty()
+{
+        "_id" : ObjectId("6364ef1694a42d7cc8ff0551"),
+        "houseNo" : 23,
+        "streetName" : "Main Dave Street",
+        "city" : "New York",
+        "zipCode" : 7002
+}
+{
+        "_id" : ObjectId("6364f07694a42d7cc8ff0552"),
+        "houseNo" : 23,
+        "streetName" : "Main Dave Street",
+        "city" : "New York",
+        "zipCode" : 7002
+}
+> db.address.insertOne({houseNo:66,streetName:"New Stadium Street",city:"Kingston",zipCode:12365})
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("6364f26194a42d7cc8ff0553")
+}
+> db.address.insertOne({houseNo:46,streetName:"Street of Leader",city:"Sidny",zipCode:15365})
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("6364f28d94a42d7cc8ff0554")
+}
+
+----------------------------------------------------------------------------------------------------------------------------------
+> db.address.find().pretty()
+{
+        "_id" : ObjectId("6364ef1694a42d7cc8ff0551"),
+        "houseNo" : 23,
+        "streetName" : "Main Dave Street",
+        "city" : "New York",
+        "zipCode" : 7002
+}
+{
+        "_id" : ObjectId("6364f07694a42d7cc8ff0552"),
+        "houseNo" : 23,
+        "streetName" : "Main Dave Street",
+        "city" : "New York",
+        "zipCode" : 7002
+}
+{
+        "_id" : ObjectId("6364f26194a42d7cc8ff0553"),
+        "houseNo" : 66,
+        "streetName" : "New Stadium Street",
+        "city" : "Kingston",
+        "zipCode" : 12365
+}
+{
+        "_id" : ObjectId("6364f28d94a42d7cc8ff0554"),
+        "houseNo" : 46,
+        "streetName" : "Street of Leader",
+        "city" : "Sidny",
+        "zipCode" : 15365
+}
+{
+        "_id" : ObjectId("6364f37794a42d7cc8ff0555"),
+        "houseNo" : 96,
+        "streetName" : "Street of Humanity",
+        "city" : "Rochester",
+        "zipCode" : 8365
+}
+>
+----------------------------------------------------------------------------------------------------------
+
+> db.address.find({city:"Rochester"})
+{ "_id" : ObjectId("6364f37794a42d7cc8ff0555"), "houseNo" : 96, "streetName" : "Street of Humanity", "city" : "Rochester", "zipCode" : 8365 }
+>
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+> db.address.find({city:"New York"}).count()
+2
+>
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+> db.address.find({city:{ $in: ["Rochester","New York","Kingston"]}})
+{ "_id" : ObjectId("6364ef1694a42d7cc8ff0551"), "houseNo" : 23, "streetName" : "Main Dave Street", "city" : "New York", "zipCode" : 7002 }
+{ "_id" : ObjectId("6364f07694a42d7cc8ff0552"), "houseNo" : 23, "streetName" : "Main Dave Street", "city" : "New York", "zipCode" : 7002 }
+{ "_id" : ObjectId("6364f26194a42d7cc8ff0553"), "houseNo" : 66, "streetName" : "New Stadium Street", "city" : "Kingston", "zipCode" : 12365 }
+{ "_id" : ObjectId("6364f37794a42d7cc8ff0555"), "houseNo" : 96, "streetName" : "Street of Humanity", "city" : "Rochester", "zipCode" : 8365 }
+>
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+> db.address.deleteOne({city:"New York"})
+{ "acknowledged" : true, "deletedCount" : 1 }
+>
